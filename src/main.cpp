@@ -6,7 +6,6 @@
  *
  * Copyright (c) 2023 Marius Knies
  */
-#define VERSION "0.0.1"
 
 #include <Arduino.h>
 #include <SPI.h>
