@@ -8,6 +8,10 @@
  */
 #include "Screen.h"
 #include "config.h"
+
+/*
+Init the screen
+*/
 Screen::Screen()
 {
     if (OLED_SELECT == false)
@@ -15,7 +19,6 @@ Screen::Screen()
         return;
     }
 
-    // Screen::_display = Adafruit_SSD1306(-1);
     //  0x3C for I2C
     Screen::_display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     Screen::_display.clearDisplay();
