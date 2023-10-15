@@ -1,5 +1,5 @@
 # dmxFogMachineArduino
-#### __Use cases__
+## __Use cases__
 I use this to control my own fog machine, which does not have a dmx port. But a button. I connected a relay to this button, every time the channel 20 is active as an example, the relay gets turned on.
 
 ## What do you need?
