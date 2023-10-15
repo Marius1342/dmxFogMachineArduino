@@ -24,6 +24,7 @@
 
 #include "config.h"
 
+#pragma region Vars
 uint16_t dmxAddress = standardAddress;
 uint16_t oldDmx = standardAddress;
 uint64_t lastActive = millis();
@@ -32,12 +33,13 @@ bool reset = false;
 bool onState = false;
 Screen *lcd = nullptr;
 
-void printText(const String &Text)
-{
-  lcd->printText(Text);
-}
+#pragma endregion
+
+#pragma region function declarations
 
 void handelOLED();
+
+#pragma endregion
 
 void reloadDmx()
 {
@@ -52,17 +54,17 @@ void reloadDmx()
   {
     dmxAddress = standardAddress;
     EEPROM.put(EEPROM_ADDRESS, dmxAddress);
-    printText("Reset, wait");
+    lcd->printText("Reset, wait");
     delay(750);
-    printText("CH: " + String(dmxAddress));
+    lcd->printText("CH: " + String(dmxAddress));
     reset = false;
     return;
   }
   EEPROM.put(EEPROM_ADDRESS, dmxAddress);
   reset = true;
-  printText("Set, wait");
+  lcd->printText("Set, wait");
   delay(750);
-  printText("CH: " + String(dmxAddress));
+  lcd->printText("CH: " + String(dmxAddress));
 }
 
 void downAddress()
@@ -77,7 +79,7 @@ void downAddress()
   {
     dmxAddress--;
   }
-  printText("CH: " + String(dmxAddress));
+  lcd->printText("CH: " + String(dmxAddress));
 
   // Check if dmxAddress is old dmx address
   if (oldDmx == dmxAddress)
@@ -101,7 +103,7 @@ void upAddress()
   {
     dmxAddress++;
   }
-  printText("CH: " + String(dmxAddress));
+  lcd->printText("CH: " + String(dmxAddress));
 
   // Check if dmxAddress is old dmx address
   if (oldDmx == dmxAddress)
@@ -173,7 +175,7 @@ void loop()
     }
     else
     {
-      printText("Min spray time: " + String(minSprayTime) + "ms");
+      lcd->printText("Min spray time: " + String(minSprayTime) + "ms");
     }
   }
 
@@ -182,12 +184,12 @@ void loop()
   if (DMXSerial.noDataSince() > DMX_TIMEOUT_WARN)
   {
     digitalWrite(mosfetAddress, LOW);
-    printText("No DMX");
+    lcd->printText("No DMX");
     delay(2000);
   }
   else
   {
-    printText("CH:" + String(dmxAddress));
+    lcd->printText("CH:" + String(dmxAddress));
   }
 }
 
