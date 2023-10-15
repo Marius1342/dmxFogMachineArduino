@@ -22,3 +22,6 @@ The button and OLED display is not required but useful.
 1. Configure the [config](/lib/config/src/config.h) for your purpose 
 2. Upload to your arduino
 3. Test and send bug reports if you found some km3814837@gmail.com
+
+
+*Currently i dont have very much free time, thats why this version have some bugs and i cannot update this project frequently*
