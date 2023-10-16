@@ -54,9 +54,9 @@ void reloadDmx()
     dmxAddress = standardAddress;
     EEPROM.put(EEPROM_ADDRESS, dmxAddress);
     lcd->printText("Reset, wait");
+    reset = false;
     delay(750);
     lcd->printText("CH: " + String(dmxAddress));
-    reset = false;
     return;
   }
   EEPROM.put(EEPROM_ADDRESS, dmxAddress);
@@ -118,14 +118,12 @@ void upAddress()
 void setup()
 {
 
+  // Set all ports
   pinMode(11, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(mosfetAddress, OUTPUT);
 
-  lcd = new Screen();
-
-  pinMode(mosfetAddress, OUTPUT);
-
+  // Check if the buttons are connected
   if (OLED_SELECT)
   {
     pinMode(SELECT_BTN, INPUT_PULLUP);
@@ -133,11 +131,17 @@ void setup()
     pinMode(UP, INPUT_PULLUP);
   }
 
+  // Initialize all classes
+  lcd = new Screen();
+
   DMXSerial.init(DMXReceiver);
 
+  // Print hello
   lcd->welcome();
   if (OLED_SELECT)
   {
+    // Check if the EEPROM have already set up
+    // If the upper address have the magic number 22, already set up
     if (EEPROM.read(EEPROM_ADDRESS + 2) == 22)
     {
       EEPROM.get(EEPROM_ADDRESS, dmxAddress);
@@ -154,7 +158,10 @@ void setup()
 
 void loop()
 {
-  int value = DMXSerial.read(20);
+  // Read the dmx address
+  int value = DMXSerial.read(dmxAddress);
+
+  // Spray
   if (value > 0 && onState == false)
   {
     onState = true;
@@ -174,14 +181,17 @@ void loop()
     }
     else
     {
+      // Remind the end user for the min spray time
       lcd->printText("Min spray time: " + String(minSprayTime) + "ms");
     }
   }
 
   handelOLED();
 
+  // Handel if dmx is disconnected
   if (DMXSerial.noDataSince() > DMX_TIMEOUT_WARN)
   {
+    // Safety disable the relay
     digitalWrite(mosfetAddress, LOW);
     lcd->printText("No DMX");
     delay(2000);
@@ -198,16 +208,19 @@ void handelOLED()
   {
     if (digitalRead(SELECT_BTN) == HIGH)
     {
+      // New dmx address
       reloadDmx();
       delay(250);
     }
     else if (digitalRead(DOWN) == HIGH)
     {
+      // Down dmx
       downAddress();
       delay(delayTimeButton);
     }
     else if (digitalRead(UP) == HIGH)
     {
+      // Up dmx
       upAddress();
       delay(delayTimeButton);
     }
