@@ -30,6 +30,8 @@
 #define DMX_TIMEOUT_WARN 8000
 // The minimal spray time for the arduino in ms
 #define minSprayTime 700
+// Just a constant, all delays use this, for user text and co in ms
+#define WAIT_TIME 2000
 
 #if minSprayTime < 700
 #pragma warning When the spray time is to short, your fog machine can be damaged

@@ -119,8 +119,6 @@ void setup()
 {
 
   // Set all ports
-  pinMode(11, OUTPUT);
-  pinMode(10, OUTPUT);
   pinMode(mosfetAddress, OUTPUT);
 
   // Check if the buttons are connected
@@ -194,7 +192,7 @@ void loop()
     // Safety disable the relay
     digitalWrite(mosfetAddress, LOW);
     lcd->printText("No DMX");
-    delay(2000);
+    delay(WAIT_TIME);
   }
   else
   {
@@ -204,25 +202,28 @@ void loop()
 
 void handelOLED()
 {
-  if (OLED_SELECT)
+
+  // Compile only code which is needed
+#if OLED_SELECT == false
+  return;
+#endif
+
+  if (digitalRead(SELECT_BTN) == HIGH)
   {
-    if (digitalRead(SELECT_BTN) == HIGH)
-    {
-      // New dmx address
-      reloadDmx();
-      delay(250);
-    }
-    else if (digitalRead(DOWN) == HIGH)
-    {
-      // Down dmx
-      downAddress();
-      delay(delayTimeButton);
-    }
-    else if (digitalRead(UP) == HIGH)
-    {
-      // Up dmx
-      upAddress();
-      delay(delayTimeButton);
-    }
+    // New dmx address
+    reloadDmx();
+    delay(250);
+  }
+  else if (digitalRead(DOWN) == HIGH)
+  {
+    // Down dmx
+    downAddress();
+    delay(delayTimeButton);
+  }
+  else if (digitalRead(UP) == HIGH)
+  {
+    // Up dmx
+    upAddress();
+    delay(delayTimeButton);
   }
 }
