@@ -14,7 +14,7 @@ I use this to control my own fog machine, which does not have a dmx port. But a 
 *You can find the pre configured ports [here](/lib/config/src/config.h)*
 
 ## Here is an wiring diagram
-![image](/docs/picture.jpg)
+![image](https://raw.githubusercontent.com/Marius1342/dmxFogMachineArduino/main/docs/Picture.jpg)
 I hope you can read it.
 On the RS-485 Module, where DMX stands, there you have to connect the dmx pins A and B.
 The T stands for a button.
