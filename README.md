@@ -20,6 +20,15 @@ On the RS-485 Module, where DMX stands, there you have to connect the dmx pins A
 The T stands for a button.
 The button and OLED display is not required but useful.
 
+### wiring basic without display
+- GND => GND 
+- GND => RS-485 DI,DE,RE
+- RX => RS-485 RO
+- 5V => RS-485 VCC
+- 5V => Relay VCC
+- D11 => Relay EN
+- GND => Relay GND
+
 ## What will come next?
 - 📝 New wiring diagram
 - 📝 Clean up the code
