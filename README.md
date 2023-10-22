@@ -20,6 +20,12 @@ On the RS-485 Module, where DMX stands, there you have to connect the dmx pins A
 The T stands for a button.
 The button and OLED display is not required but useful.
 
+
+#### Here is an example soldered board
+![image](https://raw.githubusercontent.com/Marius1342/dmxFogMachineArduino/main/docs/Example.jpg)
+Not the best solder board but it is working 
+
+
 ### wiring basic without display
 - GND => GND 
 - GND => RS-485 DI,DE,RE
