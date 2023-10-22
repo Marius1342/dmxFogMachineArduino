@@ -22,7 +22,7 @@ The button and OLED display is not required but useful.
 
 
 #### Here is an example soldered board
-![image](https://raw.githubusercontent.com/Marius1342/dmxFogMachineArduino/main/docs/Example.jpg)
+![image](https://github.com/Marius1342/dmxFogMachineArduino/blob/ab2bd638f4312b3afe7081bbd6ca2802ba90495c/docs/Example.jpg)
 Not the best solder board but it is working 
 
 
